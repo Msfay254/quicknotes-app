@@ -1,15 +1,31 @@
-// 1. Select the elements we need from the page
 const form = document.querySelector("#note-form");
 const noteInput = document.querySelector("#note-input");
 const categorySelect = document.querySelector("#note-category");
 const notesList = document.querySelector("#notes-list");
+const errorMessage = document.querySelector("#error-message");
+const noteCount = document.querySelector("#note-count");
 
-// 2. The array that holds all our notes
 let notes = [];
 
-// 3. Draw every note on the page
+function updateCount() {
+  if (notes.length === 0) {
+    noteCount.textContent = "You have no notes yet.";
+  } else if (notes.length === 1) {
+    noteCount.textContent = "You have 1 note.";
+  } else {
+    noteCount.textContent = "You have " + notes.length + " notes.";
+  }
+}
+
+function deleteNote(id) {
+  notes = notes.filter(function (note) {
+    return note.id !== id;
+  });
+  render();
+}
+
 function render() {
-  notesList.textContent = ""; // empty the list first
+  notesList.textContent = "";
 
   notes.forEach(function (note) {
     const li = document.createElement("li");
@@ -32,21 +48,39 @@ function render() {
     const deleteBtn = document.createElement("button");
     deleteBtn.type = "button";
     deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", function () {
+      deleteNote(note.id);
+    });
 
     li.appendChild(text);
     li.appendChild(meta);
     li.appendChild(deleteBtn);
     notesList.appendChild(li);
   });
+
+  updateCount();
 }
 
-// 4. When the form is submitted, add a note
 form.addEventListener("submit", function (event) {
-  event.preventDefault(); // stop the page from reloading
+  event.preventDefault();
+
+  const text = noteInput.value.trim();
+
+  if (text === "") {
+    errorMessage.textContent = "Please type a note first.";
+    return;
+  }
+
+  if (text.length > 200) {
+    errorMessage.textContent = "Notes must be 200 characters or fewer.";
+    return;
+  }
+
+  errorMessage.textContent = "";
 
   const note = {
     id: Date.now(),
-    text: noteInput.value,
+    text: text,
     category: categorySelect.value,
     createdAt: new Date().toLocaleString()
   };
@@ -54,9 +88,8 @@ form.addEventListener("submit", function (event) {
   notes.push(note);
   render();
 
-  noteInput.value = ""; // clear the input
+  noteInput.value = "";
   noteInput.focus();
 });
 
-// 5. Draw once when the page loads
 render();
