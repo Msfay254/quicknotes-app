@@ -1,0 +1,158 @@
+/* 1. Reset: include padding and border in an element's width */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Page-wide styles */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f4f7;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* 3. Header */
+header {
+  background-color: #2a6f97;
+  color: white;
+  text-align: center;
+  padding: 24px 16px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header p {
+  margin: 4px 0 0;
+}
+
+/* 4. Main column, centred, max 700px */
+main {
+  max-width: 700px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* 5. White section cards */
+section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+/* 6. Form laid out with Flexbox */
+#note-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#note-form label {
+  font-weight: bold;
+}
+
+#note-input {
+  flex: 1;
+}
+
+input, select, button {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+#search-input {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* 7. Buttons and hover */
+button {
+  background-color: #2a6f97;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b4f72;
+}
+
+/* 8. Error message in red */
+#error-message {
+  color: #c0392b;
+  font-weight: bold;
+  margin: 10px 0 0;
+}
+
+/* 9. Note cards */
+#notes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.note {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-left: 6px solid #999;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #fafafa;
+}
+
+.note-text {
+  margin: 0 0 6px;
+  word-wrap: break-word;
+}
+
+.note-meta {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 8px;
+}
+
+.note-category {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.note button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  background-color: #c0392b;
+}
+
+.note button:hover {
+  background-color: #922b21;
+}
+
+/* 10. A different look for each category */
+.category-personal {
+  border-left-color: teal;
+}
+
+.category-work {
+  border-left-color: darkred;
+}
+
+.category-study {
+  border-left-color: dodgerblue;
+}
+
+/* 11. Small screens: stack the form vertically */
+@media (max-width: 600px) {
+  #note-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
