@@ -156,3 +156,11 @@ button:hover {
     align-items: stretch;
   }
 }
+#clear-all {
+  background-color: #c0392b;
+  margin-bottom: 12px;
+}
+
+#clear-all:hover {
+  background-color: #922b21;
+}
